@@ -36,15 +36,15 @@ def screenshot():
         page.wait_for_timeout(500)
         page.screenshot(path="/tmp/ticket-index.png", animations="disabled")
         print("Saved /tmp/ticket-index.png")
-        # ticket-details.html — full view with strip bar
-        page.goto("http://localhost:8000/ticket-details.html")
+        # static-details.html — full view with strip bar
+        page.goto("http://localhost:8000/static-details.html")
         page.wait_for_timeout(500)
-        page.screenshot(path="/tmp/ticket-details.png", full_page=True, animations="disabled")
-        print("Saved /tmp/ticket-details.png")
+        page.screenshot(path="/tmp/static-details.png", full_page=True, animations="disabled")
+        print("Saved /tmp/static-details.png")
         browser.close()
 
 if __name__ == "__main__":
     ensure_server()
     screenshot()
     print("\nOpen screenshots to verify:")
-    print("  open /tmp/ticket-index.png /tmp/ticket-details.png")
+    print("  open /tmp/ticket-index.png /tmp/static-details.png")

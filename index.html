@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>One Way Ticket</title>
-    <link rel="stylesheet" href="ticket-master/style.css">
+    <link rel="stylesheet" href="static/style.css">
     <script>
         // Load color.css with a cache-busting timestamp to ensure updates apply
         (function() {
             const link = document.createElement('link');
             link.rel = 'stylesheet';
             link.type = 'text/css';
-            link.href = `ticket-master/color.css?t=${Date.now()}`;
+            link.href = `static/color.css?t=${Date.now()}`;
             document.head.appendChild(link);
         })();
     </script>
@@ -83,7 +83,7 @@
     <div class="main-bg">
         <div style="background:#1C87D8; width:100%; border-top-left-radius:32px; border-top-right-radius:32px;">
             <div class="header-bar" style="background:transparent;">
-                <span class="back-arrow" onclick="window.location.href='ticket-details.html'">
+                <span class="back-arrow" onclick="window.location.href='static-details.html'">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
                         <polyline points="15 18 9 12 15 6" />
                     </svg>
@@ -93,9 +93,9 @@
         </div>
         <div class="ticket-container">
             <div class="qr-border">
-                <img src="ticket-master/your-qr-code-image.png" alt="QR Code">
+                <img src="static/your-qr-code-image.png" alt="QR Code">
             </div>
-            <div class="tap-enlarge" onclick="window.location.href='ticket-details.html'">Tap to enlarge</div>
+            <div class="tap-enlarge" onclick="window.location.href='static-details.html'">Tap to enlarge</div>
             <hr>
             <div class="ticket-title">INTERSTATE</div>
             <div class="zone-number">11</div>

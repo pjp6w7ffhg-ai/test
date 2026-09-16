@@ -22,7 +22,7 @@ bash gitpush.sh
 
 **Two pages:**
 - `index.html` — compact mobile ticket view with QR code, color strips, progress bar, and "Tap to enlarge" link
-- `ticket-details.html` — full-size view; zone number is clickable and cycles 1–11; has an adult count updater
+- `static-details.html` — full-size view; zone number is clickable and cycles 1–11; has an adult count updater
 
 **Timer logic (in both HTML files):**
 - 60-minute countdown stored in `localStorage` (`deadlineDate`, `deadlineStart`)
@@ -30,8 +30,8 @@ bash gitpush.sh
 - Updates every second via `setInterval`
 
 **Styling:**
-- `ticket-master/style.css` — all layout and component styles
-- `ticket-master/color.css` — CSS custom properties for theming; this is the only file that needs editing to change the color scheme:
+- `static/style.css` — all layout and component styles
+- `static/color.css` — CSS custom properties for theming; this is the only file that needs editing to change the color scheme:
   - `--first` — QR code border color (can be any color — pink, blue, etc.)
   - `--stripone` — leftmost color block in the bottom strip bar
   - `--striptwo` — middle color block in the bottom strip bar
@@ -56,10 +56,10 @@ When the user provides a screenshot or image and says to match colors, **do not 
 **Workflow:**
 1. Look at the image. For each region above, identify its color.
 2. Derive an accurate hex value — study hue, saturation, and brightness precisely. Do not default to generic approximations (e.g. "green" → `#008000`).
-3. Edit `ticket-master/color.css` — update all four `--variable` values.
+3. Edit `static/color.css` — update all four `--variable` values.
 4. All four variables must be updated every time, even if some look similar — confirm each one independently.
 5. **Verify with Playwright screenshot:**
-   - Run `python3 verify-colors.py` — it starts the server if needed and saves screenshots to `/tmp/ticket-index.png` and `/tmp/ticket-details.png`
+   - Run `python3 verify-colors.py` — it starts the server if needed and saves screenshots to `/tmp/ticket-index.png` and `/tmp/static-details.png`
    - Read both screenshots and visually confirm QR border and strip bar colors match the target image
    - If colors look wrong, re-examine the image, correct `color.css`, and run the script again
 6. Once colors are verified, commit and push:
@@ -69,4 +69,4 @@ When the user provides a screenshot or image and says to match colors, **do not 
 
 **Note:** The header bar color is NOT in color.css and does not need to change.
 
-**Fonts:** SF Pro Display Bold and Medium loaded from `ticket-master/` as local `.otf` files via `@font-face`.
+**Fonts:** SF Pro Display Bold and Medium loaded from `static/` as local `.otf` files via `@font-face`.

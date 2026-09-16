@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=402, user-scalable=0">
     <title>One Way Ticket</title>
     <link rel="stylesheet" href="static/style.css">
     <script>
@@ -16,14 +16,12 @@
         })();
     </script>
     <style>
-        /* Coordinates measured from a real iPhone 16 Pro screenshot (402x874 @3x), scaled to fit any screen width. */
-        html,body { margin:0; padding:0; background:#fff; overflow-x:hidden; }
+        /* Coordinates measured from a real iPhone 16 Pro screenshot (402x874 @3x). Fixed-width viewport (see meta tag) lets the browser auto-scale this to any screen, same technique as static-details.html. */
+        html,body { margin:0; padding:0; background:#fff; }
         body { font-family: "SF Pro Display Medium", -apple-system, Arial, sans-serif; }
-        .stage { position:relative; width:100%; overflow:hidden; }
         .main-bg {
-            position: absolute; top:0; left:50%;
-            width: 402px; height: 874px; overflow: hidden;
-            transform-origin: top center;
+            position: relative;
+            width: 402px; height: 874px; margin: 0 auto; overflow: hidden;
             background: linear-gradient(to bottom, #1C87D8 0%, #1C87D8 48%, #fff 48%, #fff 100%);
         }
         .header-bar { position:absolute; top:0; left:0; width:402px; height:0; padding:0; }
@@ -82,7 +80,6 @@
     </style>
 </head>
 <body>
-    <div class="stage">
     <div class="main-bg">
         <div style="background:#1C87D8; width:100%; border-top-left-radius:32px; border-top-right-radius:32px;">
             <div class="header-bar" style="background:transparent;">
@@ -118,19 +115,6 @@
         </div>
         <div class="page-dot"></div>
     </div>
-    </div>
-    <script>
-        // Scale the fixed 402x874 design canvas to fit any real phone width.
-        function fitStage() {
-            var stage = document.querySelector('.stage');
-            var mainBg = document.querySelector('.main-bg');
-            var scale = Math.min(1, window.innerWidth / 402);
-            mainBg.style.transform = 'translateX(-50%) scale(' + scale + ')';
-            stage.style.height = (874 * scale) + 'px';
-        }
-        window.addEventListener('resize', fitStage);
-        fitStage();
-    </script>
     <script>
         // --- 60-minute deadline with persistence + 10-min auto reset ---
         let deadlineDate = null;

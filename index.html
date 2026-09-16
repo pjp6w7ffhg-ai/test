@@ -17,11 +17,11 @@
     </script>
     <style>
         /* Coordinates measured from a real iPhone 16 Pro screenshot (402x874 @3x), scaled to fit any screen width. */
-        html,body { margin:0; padding:0; background:#fff; }
+        html,body { margin:0; padding:0; background:#fff; overflow-x:hidden; }
         body { font-family: "SF Pro Display Medium", -apple-system, Arial, sans-serif; }
-        .stage { width:402px; margin:0 auto; }
+        .stage { position:relative; width:100%; overflow:hidden; }
         .main-bg {
-            position: relative;
+            position: absolute; top:0; left:50%;
             width: 402px; height: 874px; overflow: hidden;
             transform-origin: top center;
             background: linear-gradient(to bottom, #1C87D8 0%, #1C87D8 48%, #fff 48%, #fff 100%);
@@ -124,8 +124,8 @@
         function fitStage() {
             var stage = document.querySelector('.stage');
             var mainBg = document.querySelector('.main-bg');
-            var scale = Math.min(1, window.innerWidth / 402);
-            mainBg.style.transform = 'scale(' + scale + ')';
+            var scale = Math.min(1, window.innerWidth / 402, window.innerHeight / 874);
+            mainBg.style.transform = 'translateX(-50%) scale(' + scale + ')';
             stage.style.height = (874 * scale) + 'px';
         }
         window.addEventListener('resize', fitStage);

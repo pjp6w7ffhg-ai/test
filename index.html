@@ -124,7 +124,7 @@
         function fitStage() {
             var stage = document.querySelector('.stage');
             var mainBg = document.querySelector('.main-bg');
-            var scale = Math.min(1, window.innerWidth / 402, window.innerHeight / 874);
+            var scale = Math.min(1, window.innerWidth / 402);
             mainBg.style.transform = 'translateX(-50%) scale(' + scale + ')';
             stage.style.height = (874 * scale) + 'px';
         }

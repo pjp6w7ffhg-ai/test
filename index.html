@@ -16,12 +16,14 @@
         })();
     </script>
     <style>
-        /* Coordinates measured from a real iPhone 16 Pro screenshot (402x874 @3x). */
+        /* Coordinates measured from a real iPhone 16 Pro screenshot (402x874 @3x), scaled to fit any screen width. */
         html,body { margin:0; padding:0; background:#fff; }
         body { font-family: "SF Pro Display Medium", -apple-system, Arial, sans-serif; }
+        .stage { width:402px; margin:0 auto; }
         .main-bg {
             position: relative;
-            width: 402px; height: 874px; margin: 0 auto; overflow: hidden;
+            width: 402px; height: 874px; overflow: hidden;
+            transform-origin: top center;
             background: linear-gradient(to bottom, #1C87D8 0%, #1C87D8 48%, #fff 48%, #fff 100%);
         }
         .header-bar { position:absolute; top:0; left:0; width:402px; height:0; padding:0; }
@@ -80,6 +82,7 @@
     </style>
 </head>
 <body>
+    <div class="stage">
     <div class="main-bg">
         <div style="background:#1C87D8; width:100%; border-top-left-radius:32px; border-top-right-radius:32px;">
             <div class="header-bar" style="background:transparent;">
@@ -115,6 +118,19 @@
         </div>
         <div class="page-dot"></div>
     </div>
+    </div>
+    <script>
+        // Scale the fixed 402x874 design canvas to fit any real phone width.
+        function fitStage() {
+            var stage = document.querySelector('.stage');
+            var mainBg = document.querySelector('.main-bg');
+            var scale = Math.min(1, window.innerWidth / 402);
+            mainBg.style.transform = 'scale(' + scale + ')';
+            stage.style.height = (874 * scale) + 'px';
+        }
+        window.addEventListener('resize', fitStage);
+        fitStage();
+    </script>
     <script>
         // --- 60-minute deadline with persistence + 10-min auto reset ---
         let deadlineDate = null;

@@ -94,7 +94,7 @@
     <div class="main-bg">
         <div style="background:#1C87D8; width:100%; border-top-left-radius:32px; border-top-right-radius:32px;">
             <div class="header-bar" style="background:transparent;">
-                <span class="back-arrow" onclick="window.location.href='static-details.html'">
+                <span class="back-arrow" onclick="window.location.href='static-details.html?t=' + Date.now()">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
                         <polyline points="15 18 9 12 15 6" />
                     </svg>
@@ -106,7 +106,7 @@
             <div class="qr-border">
                 <img src="static/your-qr-code-image.png" alt="QR Code">
             </div>
-            <div class="tap-enlarge" onclick="window.location.href='static-details.html'">Tap to enlarge</div>
+            <div class="tap-enlarge" onclick="window.location.href='static-details.html?t=' + Date.now()">Tap to enlarge</div>
             <hr>
             <div class="ticket-title">INTERSTATE</div>
             <div class="zone-number">11</div>

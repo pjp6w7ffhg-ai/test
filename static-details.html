@@ -182,7 +182,7 @@
         const backBtn = document.getElementById('back-to-ticket-btn');
         if (backBtn) {
             backBtn.addEventListener('click', function() {
-                const target = new URL('index.html', window.location.href).href;
+                const target = new URL('index.html?t=' + Date.now(), window.location.href).href;
                 window.location.assign(target);
             });
         }

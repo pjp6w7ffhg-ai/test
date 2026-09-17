@@ -1,3 +1,5 @@
 update-from-amar-louis.py
 ./unpublish.sh
 tmp/
+# pixel-match scratch output (verify-colors.py) — regenerated, never published
+_*.png

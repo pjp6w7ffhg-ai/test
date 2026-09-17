@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=402, user-scalable=0, viewport-fit=cover">
     <meta name="theme-color" content="#1C87D8">
     <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <title>One Way Ticket</title>
     <link rel="stylesheet" href="static/style.css">
     <script>
@@ -22,17 +23,25 @@
         html,body { margin:0; padding:0; background:#1C87D8; }
         body { font-family: "SF Pro Display Medium", -apple-system, Arial, sans-serif; }
         .main-bg {
+            /* The 874px canvas is the FULL screen, so every `top` below is measured from the top of the
+               screen and the first 59px are the iPhone 16 Pro status bar. iOS only puts the web view under
+               the status bar when the web clip was added with a black-translucent status bar (then
+               env(safe-area-inset-top) is 59px); with the default opaque bar the web view starts BELOW the
+               bar and the inset is 0 (and since iOS 26.1 black-translucent no longer works at all). Shift the
+               canvas up by whatever part of those 59px the status bar already covers, so the header lands at
+               the same screen position either way instead of 59px too low. */
+            --inset-top: env(safe-area-inset-top, 0px);
             position: relative;
-            width: 402px; height: 874px; margin: 0 auto; overflow: hidden;
+            width: 402px; height: 874px; margin: calc(var(--inset-top) - 59px) auto 0; overflow: hidden;
             background: linear-gradient(to bottom, #1C87D8 0%, #1C87D8 48%, #fff 48%, #fff 100%);
         }
         .header-bar { position:absolute; top:0; left:0; width:402px; height:0; padding:0; }
         .header-title {
-            position:absolute; top:calc(env(safe-area-inset-top, 20px) + 8px); left:0; width:402px; padding-left:12.7px; box-sizing:border-box; text-align:center;
+            position:absolute; top:91px; left:0; width:402px; padding-left:12.7px; box-sizing:border-box; text-align:center;
             font-size:17.88px; font-weight:600; line-height:1; color:#fff; letter-spacing:0;
         }
         .back-arrow {
-            position:absolute; left:9px; top:calc(env(safe-area-inset-top, 20px) + 5px); width:24px; height:24px;
+            position:absolute; left:9px; top:88px; width:24px; height:24px;
             display:flex; align-items:center; justify-content:center; color:#fff; cursor:pointer;
         }
         .back-arrow svg { width:24px; height:24px; }

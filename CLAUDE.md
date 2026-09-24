@@ -57,11 +57,17 @@ When the user provides a screenshot or image and says to match colors, **do not 
 └─────────────────────────────┘
 ```
 
-**Workflow:**
-1. Look at the image. For each region above, identify its color.
-2. Derive an accurate hex value — study hue, saturation, and brightness precisely. Do not default to generic approximations (e.g. "green" → `#008000`).
-3. Edit `static/color.css` — update all four `--variable` values.
-4. All four variables must be updated every time, even if some look similar — confirm each one independently.
+**Workflow (use the sampler script -- do NOT eyeball or guess):**
+1. Run the sampler against the ticket image:
+   ```
+   python3 sample-colors.py <path-to-ticket-image.jpg>
+   ```
+   It will print the exact hex values to paste into `static/color.css`.
+2. Edit `static/color.css` with the sampled values. All four variables must be updated every time.
+3. **Never trust the existing comments in color.css** -- they describe variable purpose, not current color, and past sessions have left them stale/wrong.
+
+**Why the sampler exists (past failure mode to avoid):**
+Previous sessions eyeballed or guessed colors, leading to completely wrong values each time ("Automated publish" history). The QR border failure was caused by sampling the wrong pixel column (x=115 hits white card background instead of the yellow border at x=140+). The sampler scans for actual yellow pixels rather than assuming a fixed coordinate.
 5. **Verify with Playwright screenshot:**
    - Run `python3 verify-colors.py` — it starts the server if needed and saves screenshots to `/tmp/ticket-index.png` and `/tmp/static-details.png`
    - Read both screenshots and visually confirm QR border and strip bar colors match the target image
